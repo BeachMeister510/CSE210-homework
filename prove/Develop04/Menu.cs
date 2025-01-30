@@ -11,6 +11,7 @@ class Menu()
         Console.WriteLine("3. Save");
         Console.WriteLine("4. Display Journal");
         Console.WriteLine("5. Quit");
+        Console.WriteLine();
     }
 }
 
