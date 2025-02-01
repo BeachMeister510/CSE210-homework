@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography.X509Certificates;
 
-class Prompt
+public class Prompt
 {
 
     public List<string> _prompts = new List<string>();
@@ -26,4 +26,11 @@ class Prompt
         return prompt;
     }
 
+    public void Display()
+    {
+        foreach (string prompt in _prompts)
+        {
+            Console.WriteLine(prompt);
+        }
+    }
 }
