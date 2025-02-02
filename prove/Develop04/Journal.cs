@@ -69,7 +69,7 @@ public class Journal
             {
                 Console.WriteLine(entry.FormatToString());
                 Console.WriteLine();
-                Console.WriteLine("Please enter the changed response to your prompt");
+                Console.WriteLine("Please enter the changed response to your prompt.");
                 entry._response = Console.ReadLine();
             }
             else
