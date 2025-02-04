@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 
 public class Journal
 {
+    int test = 0;
     List<Entry> entries = new List<Entry>();
 
     public void AddEntry(string date, string prompt, string response)

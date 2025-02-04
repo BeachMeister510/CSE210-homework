@@ -3,6 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 
 public class Prompt
 {
+    int test = 0;
 
     public List<string> _prompts = new List<string>();
 

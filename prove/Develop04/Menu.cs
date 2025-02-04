@@ -4,6 +4,7 @@ using Microsoft.VisualBasic;
 
 public class Menu()
 {
+    int test = 0;
     public void Display()
     {
         Console.WriteLine("1. New Entry");

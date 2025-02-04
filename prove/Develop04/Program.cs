@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 
 class Program
 {
+    int test = 0;
     static void Main(string[] args)
     {
         Menu _menu = new Menu();
