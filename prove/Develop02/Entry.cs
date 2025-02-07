@@ -1,5 +1,5 @@
 public class Entry
-{;
+{
     int test = 0;
     public string _prompt;
     public string _date;
