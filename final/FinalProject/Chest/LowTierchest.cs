@@ -1,0 +1,4 @@
+public class LowTierChest : Chest
+{
+
+}
