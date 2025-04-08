@@ -4,7 +4,6 @@ public class Weapon : Item
 {
     private string _dmgType;
     private int _damage;
-    // private int _durabiltiy;
     private int _hands;
     private bool _equipped;
 
@@ -30,6 +29,11 @@ public class Weapon : Item
         return (_hands);
     }
 
+    public void Unequip()
+    {
+        _equipped = false;
+    }
+
     public int Attack()
     {
         return _damage;
@@ -37,6 +41,21 @@ public class Weapon : Item
     public string GetDmgType()
     {
         return _dmgType;
+    }
+
+    public override string CheckItemName()
+    {
+        return _itemName;
+    }
+
+    public override string CheckItemRarity()
+    {
+        return _itemRarity;
+    }
+
+    public bool CheckEquiped()
+    {
+        return _equipped;
     }
 
     public Weapon(string name, string desc, string rarity, int value, string dmgType, int damage, int hands, bool equiped) : base(name, desc, rarity, value)

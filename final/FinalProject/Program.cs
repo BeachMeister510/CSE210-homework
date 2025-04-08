@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -18,6 +19,7 @@ class Program
 
         do
         {
+            Console.WriteLine($"Goal Points");
             menu.DisplayMenu();
 
             choice = int.Parse(Console.ReadLine());
@@ -37,6 +39,7 @@ class Program
 
                 do
                 {
+                    Console.WriteLine($"Goal Points: {totpoints}");
                     menu.DisplayGoalMenu();
 
                     usergoal = int.Parse(Console.ReadLine());
@@ -46,14 +49,19 @@ class Program
                         Console.Clear();
                         Console.WriteLine("Please enter your goal name: ");
                         string goal_name = Console.ReadLine();
+
                         Console.WriteLine("Please enter a description of your goal: ");
                         string description = Console.ReadLine();
+
                         Console.WriteLine("Please enter the points this goal is worth: ");
                         int points = int.Parse(Console.ReadLine());
+
                         SimpleGoal simple = new SimpleGoal(goal_name, description, points);
                         goals.Add(simple);
+
                         Console.Clear();
                         Console.WriteLine("Your goal has been added!");
+
                         Thread.Sleep(1000);
                         Console.Clear();
                     }
@@ -143,16 +151,112 @@ class Program
 
                     if (usergame == 1)
                     {
+                        bool finished = false;
                         Event myevent = game.GetEvent();
+
                         if (myevent is Encounter encounter)
                         {
-                            bool finished = false;
                             encounter.GenerateEnemyList();
                             while (!finished)
                             {
                                 encounter.Display();
                                 encounter.Combat(game.GetPlayer());
+                                game.GetPlayer().LevelUp();
+
+
                                 finished = encounter.CheckEventFinished();
+                            }
+                        }
+                        else if (myevent is TownEvent townEvent)
+                        {
+
+                            int itemsPruchased = 0;
+                            townEvent.GenerateStore();
+
+                            while (!finished)
+                            {
+                                menu.DisplayShop();
+                                int usershop = int.Parse(Console.ReadLine());
+
+                                if (usershop == 1)
+                                {
+                                    if (game.GetPlayer().CheckInventoryFull() == false && townEvent.CheckStoreEmpty() == false)
+                                    {
+                                        itemsPruchased++;
+                                        townEvent.DisplayStore();
+                                        int itemChoice = int.Parse(Console.ReadLine());
+                                        Item item = townEvent.GetItem(itemChoice);
+                                        if (totpoints - item.GetItemValue() >= 0)
+                                        {
+                                            townEvent.Buyitem(itemChoice);
+                                            totpoints -= item.GetItemValue();
+                                            game.GetPlayer().AddToInventory(item);
+                                            Console.Clear();
+                                            Console.WriteLine($"Item: {item.CheckItemName()} has been purchased and added to inventory press enter to continue");
+                                            Console.ReadLine();
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("You dont have enough points to buy this");
+                                        }
+
+                                    }
+                                    else if (game.GetPlayer().CheckInventoryFull() == true)
+                                    {
+                                        Console.WriteLine("Your inventory is full please sell some items before buying from the shop");
+                                    }
+                                    else if (townEvent.CheckStoreEmpty() == true)
+                                    {
+                                        Console.WriteLine("The store doesn't have any items left for sale.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Error");
+                                    }
+                                }
+                                else if (usershop == 2)
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine();
+                                    game.GetPlayer().DisplayInventory();
+                                    int itemChoice = int.Parse(Console.ReadLine());
+                                    Item item = game.GetPlayer().GetItemFromInventory(itemChoice);
+
+                                    if (item is Weapon weapon)
+                                    {
+                                        if (weapon.CheckEquiped() == false)
+                                        {
+                                            totpoints += item.GetItemValue();
+                                            game.GetPlayer().RemoveFromInventory(itemChoice);
+                                            Console.Clear();
+                                            Console.WriteLine($"Item {item.CheckItemName()} has been sold. Press enter to continue.");
+                                            Console.ReadLine();
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("You must unequip an item before you can sell it.");
+                                        }
+                                    }
+                                    else if (item is Armor armor)
+                                    {
+                                        if (armor.CheckEquiped() == false)
+                                        {
+                                            totpoints += item.GetItemValue();
+                                            game.GetPlayer().RemoveFromInventory(itemChoice);
+                                            Console.Clear();
+                                            Console.WriteLine($"Item {item.CheckItemName()} has been sold. Press enter to continue.");
+                                            Console.ReadLine();
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("You must unequip an item before you can sell it.");
+                                        }
+                                    }
+                                }
+                                else if (usershop == 3)
+                                {
+                                    finished = true;
+                                }
                             }
                         }
                     }

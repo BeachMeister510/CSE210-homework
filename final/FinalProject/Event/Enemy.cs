@@ -7,6 +7,7 @@ public class Enemy
     private Weapon _weapon;
     private int _XPValue;
     private string _weakness;
+    private Inventory _inventory = new Inventory();
 
     public void Display()
     {
@@ -30,6 +31,11 @@ public class Enemy
         {
             return false;
         }
+    }
+
+    public int GetExperiance()
+    {
+        return _XPValue;
     }
 
     public int CheckInitiative()
@@ -62,6 +68,7 @@ public class Enemy
         _weapon = new Weapon(other._weapon);
         _XPValue = other._XPValue;
         _weakness = other._weakness;
+        _inventory = other._inventory;
     }
 
     public Enemy()

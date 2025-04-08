@@ -8,7 +8,9 @@ public class Game
     private Random rand = new Random();
 
     private List<Event> _events = new List<Event>{
-        new Encounter("Goblin Encounter", "You encounter a group of goblins wanting your things", 4)
+        new Encounter("Goblin Encounter", "You encounter a group of goblins wanting your things", 4),
+        new Encounter("Orc Encounter", "You encounter a group of orcs", 3),
+        new TownEvent("Midvale Encounter", "You encounter the city of Midvale", "Midvale")
     };
 
 
@@ -29,8 +31,9 @@ public class Game
 
     public Event GetEvent()
     {
+        GameStart();
         int randindex = rand.Next(_events.Count());
-        return _events[randindex];
+        return _events[2];
     }
 
     public Player GetPlayer()
@@ -43,5 +46,12 @@ public class Game
         _name = "New Game";
         _started = false;
         _player = new Player();
+    }
+
+    public Game(bool started, Player player, int points)
+    {
+        _name = "Goal Adventures";
+        _started = started;
+        _player = player;
     }
 }

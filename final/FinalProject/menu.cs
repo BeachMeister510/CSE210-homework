@@ -24,6 +24,12 @@ public class Menu
         "4. Exit Game"
     };
 
+    private List<string> _townShop = new List<string>{
+        "1. Buy item",
+        "2. Sell item",
+        "3. Leave"
+    };
+
     public void DisplayMenu()
     {
         Console.WriteLine("Please enter your selection");
@@ -49,6 +55,16 @@ public class Menu
         Console.WriteLine("Please enter your selection");
         Console.WriteLine();
         foreach (string opiton in _gameMenu)
+        {
+            Console.WriteLine(opiton);
+        }
+    }
+
+    public void DisplayShop()
+    {
+        Console.WriteLine("Please enter your selection");
+        Console.WriteLine();
+        foreach (string opiton in _townShop)
         {
             Console.WriteLine(opiton);
         }

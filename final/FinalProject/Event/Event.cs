@@ -2,8 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 public abstract class Event
 {
-    string _eventName;
-    string _eventDescription;
+    protected string _eventName;
+    protected string _eventDescription;
 
     public virtual void Display()
     {
