@@ -8,7 +8,7 @@ public class Encounter : Event
     };
     List<Enemy> _combatEnemies = new List<Enemy>();
 
-    Chest RewardChest = new Chest(3);
+    Chest _rewardChest = new Chest(3);
 
     private Random rand = new Random();
 
@@ -22,6 +22,25 @@ public class Encounter : Event
         }
     }
 
+    public void GenerateChest()
+    {
+        _rewardChest.GenerateChest();
+    }
+
+    public void DisplayChestItems()
+    {
+        _rewardChest.DisplayChestItems();
+    }
+
+    public Item TakeRewardItem(int index)
+    {
+        return _rewardChest.TakeChestItem(index);
+    }
+
+    public bool CheckChestEmpty()
+    {
+        return _rewardChest.CheckChestEmpty();
+    }
     public override bool CheckEventFinished()
     {
         Enemy deadEnemy = new Enemy();

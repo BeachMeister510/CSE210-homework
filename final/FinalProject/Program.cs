@@ -26,11 +26,11 @@ class Program
 
             if (choice == 1)
             {
-                Console.WriteLine("Not yet implemented");
+                LoadGoals("goals.txt", totpoints, goals);
             }
             else if (choice == 2)
             {
-                Console.WriteLine("Not yet implemented");
+                SaveGoals("goals.txt", totpoints, goals);
             }
 
             else if (choice == 3)
@@ -165,6 +165,28 @@ class Program
 
 
                                 finished = encounter.CheckEventFinished();
+                                if (finished == true)
+                                {
+
+                                    bool looting = true;
+                                    encounter.GenerateChest();
+
+                                    while (looting)
+                                    {
+                                        Console.WriteLine("The Chest Contains:");
+                                        encounter.DisplayChestItems();
+                                        Console.WriteLine("Enter 0 to exit or take all items");
+
+                                        int itemChoice = int.Parse(Console.ReadLine());
+                                        Item item = encounter.TakeRewardItem(itemChoice);
+                                        game.GetPlayer().AddToInventory(item);
+
+                                        if (encounter.CheckChestEmpty() == true || itemChoice == 0)
+                                        {
+                                            looting = false;
+                                        }
+                                    }
+                                }
                             }
                         }
                         else if (myevent is TownEvent townEvent)
@@ -274,37 +296,6 @@ class Program
             {
                 Console.WriteLine("Thanks for playing!");
             }
-            //     if (choice == 1)
-            //     {
-            //         Console.Clear();
-            //         Console.WriteLine("Please enter the name of the file you want to load: ");
-            //         string filename = Console.ReadLine();
-
-            //         goals = LoadGoals(filename, totpoints, goals);
-
-            //         Thread.Sleep(1000);
-            //         Console.Clear();
-            //     }
-            //     else if (choice == 2)
-            //     {
-            //         Console.Clear();
-            //         Console.WriteLine("Please enter the name of the file you want to save to:");
-            //         string filename = Console.ReadLine();
-
-            //         SaveGoals(filename, totpoints, goals);
-
-            //         Thread.Sleep(1000);
-            //         Console.Clear();
-            //     }
-            //     else if (choice == 8)
-            //     {
-            //         Console.WriteLine("Have a nice day!");
-            //     }
-            //     else
-            //     {
-            //         Console.WriteLine("Please enter a valid input");
-            //     }
-            // } while (choice != 8);
         } while (choice != 5);
     }
 

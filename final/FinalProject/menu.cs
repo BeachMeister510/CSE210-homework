@@ -1,8 +1,8 @@
 public class Menu
 {
     private List<string> _menu = new List<string>{
-        "1. Load Files ",
-        "2. Save Files",
+        "1. Load Goals ",
+        "2. Save Goals",
         "3. Goal Menu",
         "4. Game Menu",
         "5. Quit Program"

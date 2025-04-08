@@ -13,6 +13,11 @@ public class Game
         new TownEvent("Midvale Encounter", "You encounter the city of Midvale", "Midvale")
     };
 
+    public void Display()
+    {
+        Console.WriteLine($"{_name} a world of fun encounters");
+    }
+
 
     public void DisplayPlayer()
     {

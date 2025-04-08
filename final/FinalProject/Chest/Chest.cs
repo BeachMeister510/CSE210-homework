@@ -18,6 +18,18 @@ public class Chest
         }
     }
 
+    public Item TakeChestItem(int index)
+    {
+        Item item = _items.GetItem(index);
+        _items.RemoveItem(index);
+        return item;
+    }
+
+    public bool CheckChestEmpty()
+    {
+        return _items.CheckInventoryEmpty();
+    }
+
     public Chest()
     {
         _items = new Inventory(1);
